@@ -1,0 +1,41 @@
+_BASE_: ../../segmentation/clouds/clouds_config.yaml
+
+INPUT:
+  DATASET_MAPPER_NAME: "mask_former_semantic_gta5"
+  
+
+  RESIZE:
+    ENABLED: True
+  INITIAL_HEIGHT : 1052
+  INITIAL_WIDTH : 1914
+  CROP:
+    ENABLED: True
+  FLIP : True
+  COLOR_AUG_SSD: True
+
+DATASETS:
+  TRAIN: ("gta5", "sd_llama70b_v2",)
+  TARGET_FACTOR: 2.0
+  TEST: ("mapillary_val", "bdd_val", "cityscapes_val")
+
+DATALOADER:
+    SAMPLER_TRAIN: "WeightedTrainingSampler"
+
+SOLVER:
+  MAX_ITER: 40000
+  BASE_LR: 0.00001
+
+TEST:
+  EVAL_PERIOD: 4000 # 10 evaluation in total
+
+MODEL:
+  CLOUDS:
+    CLIP_MODEL_NAME: "RN101"
+    CLIP_PRETRAINED_WEIGHTS: "openai"
+    EMBED_DIM: 512
+    ENSEMBLE_ON_VALID_MASK: True
+    SAM:
+      MINIBATCH : True
+      ENABLED : True
+      ALPHA_EMA : 0.999
+  WEIGHTS : "output_final/train_gta_r101/model_final.pth"

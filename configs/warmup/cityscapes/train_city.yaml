@@ -1,0 +1,28 @@
+_BASE_: ../../segmentation/clouds/clouds_config.yaml
+
+INPUT:
+  DATASET_MAPPER_NAME: "mask_former_semantic_gta5"
+  
+
+  RESIZE:
+    ENABLED: True
+  INITIAL_HEIGHT : 1024
+  INITIAL_WIDTH : 2048
+  CROP:
+    ENABLED: True
+  FLIP : True
+  COLOR_AUG_SSD: True
+
+DATASETS:
+  TRAIN: ("cityscapes_train",)
+  TEST: ("acdc_night_val", "acdc_rain_val", "acdc_snow_val", "acdc_fog_val", "cityscapes_val")
+
+SOLVER:
+  MAX_ITER: 5000
+  BASE_LR: 0.0001
+
+TEST:
+  EVAL_PERIOD: 500 # 10 evaluation in total
+
+MODEL:
+  WEIGHTS: ""
