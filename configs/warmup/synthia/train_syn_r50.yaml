@@ -1,0 +1,34 @@
+_BASE_: ../../segmentation/clouds/clouds_config.yaml
+
+INPUT:
+  DATASET_MAPPER_NAME: "mask_former_semantic_gta5"
+
+  RESIZE:
+    ENABLED: True
+  INITIAL_HEIGHT : 760
+  INITIAL_WIDTH : 1280
+  CROP:
+    ENABLED: True
+  FLIP : True
+  COLOR_AUG_SSD: True
+
+DATASETS:
+  TRAIN: ("synthia",)
+  TEST: ("mapillary_val", "bdd_val", "cityscapes_val")
+
+SOLVER:
+  MAX_ITER: 30000
+  BASE_LR: 0.00001
+  WARMUP_ITERS: 0
+  LR_SCHEDULER_NAME: WarmupPolyLR
+
+TEST:
+  EVAL_PERIOD: 1500 # 10 evaluation in total
+
+MODEL:
+  WEIGHTS : ""
+  CLOUDS:
+    CLIP_MODEL_NAME: "RN50"
+    CLIP_PRETRAINED_WEIGHTS: "openai"
+    EMBED_DIM: 1024
+    ENSEMBLE_ON_VALID_MASK: True

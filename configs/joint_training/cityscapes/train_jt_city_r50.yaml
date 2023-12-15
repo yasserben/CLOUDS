@@ -1,0 +1,39 @@
+_BASE_: ../../segmentation/clouds/clouds_config.yaml
+
+INPUT:
+  DATASET_MAPPER_NAME: "mask_former_semantic_gta5"
+  RESIZE:
+    ENABLED: True
+  INITIAL_HEIGHT : 1024
+  INITIAL_WIDTH : 2048
+  CROP:
+    ENABLED: True
+  FLIP : True
+  COLOR_AUG_SSD: True
+
+DATASETS:
+  TRAIN: ("cityscapes_train", "sd_llama70b_v2",)
+  TARGET_FACTOR: 0.20
+  TEST: ("acdc_night_val", "acdc_rain_val", "acdc_snow_val", "acdc_fog_val", "cityscapes_val")
+
+DATALOADER:
+    SAMPLER_TRAIN: "WeightedTrainingSampler"
+
+SOLVER:
+  MAX_ITER: 10000
+  BASE_LR: 0.0001
+
+TEST:
+  EVAL_PERIOD: 500 # 10 evaluation in total
+
+MODEL:
+  CLOUDS:
+    CLIP_MODEL_NAME: "RN50"
+    CLIP_PRETRAINED_WEIGHTS: "openai"
+    EMBED_DIM: 1024
+    ENSEMBLE_ON_VALID_MASK: True
+    SAM:
+      MINIBATCH : True
+      ENABLED : True
+      ALPHA_EMA : 0.999
+  WEIGHTS : "output_final/train_city_r50/model_final.pth"

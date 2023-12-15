@@ -1,0 +1,26 @@
+_BASE_: ../../segmentation/clouds/clouds_config.yaml
+
+INPUT:
+  DATASET_MAPPER_NAME: "mask_former_semantic_gta5"
+  RESIZE:
+    ENABLED: True
+  INITIAL_HEIGHT : 1052
+  INITIAL_WIDTH : 1914
+  CROP:
+    ENABLED: True
+  FLIP : True
+  COLOR_AUG_SSD: True
+
+DATASETS:
+  TRAIN: ("gta5",)
+  TEST: ("mapillary_val", "bdd_val", "cityscapes_val")
+
+SOLVER:
+  MAX_ITER: 40000
+  BASE_LR: 0.00001
+
+TEST:
+  EVAL_PERIOD: 4000 # 10 evaluation in total
+
+MODEL:
+  WEIGHTS: ""
