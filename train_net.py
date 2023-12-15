@@ -72,7 +72,6 @@ from clouds import (
     add_wandb_config,
     add_prerocessing_training_set_config,
     PersoEvalHook,
-    PersoBestCheckpointer,
     add_repeat_factors,
 )
 from clouds.utils import setup_wandb, WandbWriter
@@ -402,15 +401,6 @@ class Trainer(DefaultTrainer):
             # Here the default print/log frequency of each writer is used.
             # run writers in the end, so that evaluation metrics are written
             ret.append(hooks.PeriodicWriter(self.build_writers(), period=20))
-        if comm.is_main_process():
-            ret.append(
-                PersoBestCheckpointer(
-                    cfg.TEST.EVAL_PERIOD,
-                    self.checkpointer,
-                    list_of_metrics,
-                    "max",
-                )
-            )
         return ret
 
 

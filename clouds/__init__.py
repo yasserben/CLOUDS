@@ -40,4 +40,4 @@ from .clouds import CLOUDS
 # evaluation
 from .evaluation.cityscapes_evaluation import CityscapesSemSegEvaluator
 from .evaluation.semantic_evaluation import ClassicalSemSegEvaluator
-from .engine.hooks import PersoEvalHook, PersoBestCheckpointer
+from .engine.hooks import PersoEvalHook
