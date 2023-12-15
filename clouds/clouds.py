@@ -10,10 +10,11 @@ Reference: https://github.com/facebookresearch/Mask2Former/blob/main/train_net.p
 """
 from typing import Tuple
 from copy import deepcopy
-
+import numpy as np
 import matplotlib.pyplot as plt
 import torch
 from torch import nn
+import os
 from torch.nn import functional as F
 
 from detectron2.config import configurable
@@ -147,8 +148,8 @@ class CLOUDS(nn.Module):
         geometric_ensemble_alpha: float,
         geometric_ensemble_beta: float,
         ensemble_on_valid_mask: bool,
-        classical_inference: bool,
-        classical_inference_ema: bool,
+        geometric_ensemble: bool,
+        geometric_ensemble_ema: bool,
         sam_enabled: bool,
         sam_mobile: bool,
         sam_minibatch: bool,
@@ -230,8 +231,8 @@ class CLOUDS(nn.Module):
         self.train_text_classifier = None
         self.test_text_classifier = None
         self.void_embedding = nn.Embedding(1, backbone.dim_latent)  # use this for void
-        self.classical_inference = classical_inference
-        self.classical_inference_ema = classical_inference_ema
+        self.geometric_ensemble = geometric_ensemble
+        self.geometric_ensemble_ema = geometric_ensemble_ema
         (
             _,
             self.train_num_templates,
@@ -494,8 +495,8 @@ class CLOUDS(nn.Module):
             "geometric_ensemble_alpha": cfg.MODEL.CLOUDS.GEOMETRIC_ENSEMBLE_ALPHA,
             "geometric_ensemble_beta": cfg.MODEL.CLOUDS.GEOMETRIC_ENSEMBLE_BETA,
             "ensemble_on_valid_mask": cfg.MODEL.CLOUDS.ENSEMBLE_ON_VALID_MASK,
-            "classical_inference": cfg.MODEL.CLOUDS.CLASSICAL_INFERENCE,
-            "classical_inference_ema": cfg.MODEL.CLOUDS.CLASSICAL_INFERENCE_EMA,
+            "geometric_ensemble": cfg.MODEL.CLOUDS.GEOMETRIC_ENSEMBLE,
+            "geometric_ensemble_ema": cfg.MODEL.CLOUDS.GEOMETRIC_ENSEMBLE_EMA,
             "sam_enabled": cfg.MODEL.CLOUDS.SAM.ENABLED,
             "sam_mobile": cfg.MODEL.CLOUDS.SAM.MOBILE,
             "sam_minibatch": cfg.MODEL.CLOUDS.SAM.MINIBATCH,
@@ -626,24 +627,6 @@ class CLOUDS(nn.Module):
                             erosion_size=self.sam_erosion_size,
                             selection_mode=self.sam_selection_mode,
                         )
-                        # RGB IMAGE
-                        visualize_rgb(images_clean[0].unsqueeze(0), 0)
-                        save_rgb(images_clean[0].unsqueeze(0), 0)
-                        # SEMANTIC MAP BEFORE
-                        visualize_semantic_map_maxed(seg_maps_target[0]["sem_seg"])
-                        save_semantic_map_maxed(seg_maps_target[0]["sem_seg"])
-                        # BINARY MASK
-                        # a = separate_dict[0][11].squeeze()
-                        # plt.imshow(a, cmap="gray")
-                        # plt.show()
-                        # binary_a = a * 255
-                        # binary_a = binary_a.astype(np.uint8)
-                        # binary_image_pil = Image.fromarray(binary_a, "L")
-                        # rgb_image = binary_image_pil.convert("RGB")
-                        # rgb_image.save("./binary_mask_pole.png")
-                        # POINT PROMPTS
-                        # visualize_points_on_mask(coordinate_dict[0][13],(768,768))
-                        # save_points_on_mask(coordinate_dict[0][5],(768,768))
                         last_targets_target = []
                         for i, dico in enumerate(batched_inputs_target):
                             image_i = dico["image"]
@@ -721,7 +704,7 @@ class CLOUDS(nn.Module):
             mask_cls_results = outputs["pred_logits"]
             mask_pred_results = outputs["pred_masks"]
 
-            if not self.classical_inference:
+            if self.geometric_ensemble:
                 # We ensemble the pred logits of in-vocab and out-vocab
                 clip_feature = features["clip_vis_dense"]
                 mask_for_pooling = F.interpolate(
@@ -877,7 +860,7 @@ class CLOUDS(nn.Module):
             mask_cls_results = outputs["pred_logits"]
             mask_pred_results = outputs["pred_masks"]
 
-            if self.classical_inference_ema:
+            if self.geometric_ensemble_ema:
                 # We ensemble the pred logits of in-vocab and out-vocab
                 clip_feature = clip_vis_dense
                 mask_for_pooling = F.interpolate(

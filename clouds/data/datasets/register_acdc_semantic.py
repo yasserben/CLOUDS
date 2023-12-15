@@ -2,6 +2,7 @@
 Copyright 2023 Telecom Paris, Yasser BENIGMIM. All rights reserved.
 Licensed under the Apache License, Version 2.0
 
+
 Reference: https://github.com/facebookresearch/detectron2/blob/main/detectron2/data/datasets/cityscapes_panoptic.py
 """
 
@@ -26,31 +27,18 @@ logger = logging.getLogger(__name__)
 
 def load_acdc_semantic(image_dir):
     """
-    Args:
-        image_dir (str): path to the raw dataset. e.g., "~/cityscapes/leftImg8bit/train".
-        gt_dir (str): path to the raw annotations. e.g.,
-            "~/cityscapes/gtFine/cityscapes_panoptic_train".
-        gt_json (str): path to the json file. e.g.,
-            "~/cityscapes/gtFine/cityscapes_panoptic_train.json".
-        meta (dict): dictionary containing "thing_dataset_id_to_contiguous_id"
-            and "stuff_dataset_id_to_contiguous_id" to map category ids to
-            contiguous ids for training.
-
-    Returns:
-        list[dict]: a list of dicts in Detectron2 standard format. (See
-        `Using Custom Datasets </tutorials/datasets.html>`_ )
     """
     if "rain" in image_dir:
-        with open("datasets/cityscapes_list/acdc_rain_dict.json") as f:
+        with open("datasets/acdc_list/acdc_rain_dict.json") as f:
             dataset_dicts = json.load(f)
     elif "snow" in image_dir:
-        with open("datasets/cityscapes_list/acdc_snow_dict.json") as f:
+        with open("datasets/acdc_list/acdc_snow_dict.json") as f:
             dataset_dicts = json.load(f)
     elif "fog" in image_dir:
-        with open("datasets/cityscapes_list/acdc_fog_dict.json") as f:
+        with open("datasets/acdc_list/acdc_fog_dict.json") as f:
             dataset_dicts = json.load(f)
     elif "night" in image_dir:
-        with open("datasets/cityscapes_list/acdc_night_dict.json") as f:
+        with open("datasets/acdc_list/acdc_night_dict.json") as f:
             dataset_dicts = json.load(f)
     return dataset_dicts
 
@@ -95,7 +83,7 @@ def register_all_acdc_semantic(root):
 
         DatasetCatalog.register(
             key,
-            lambda x=image_dir, y=gt_dir: load_acdc_semantic(x, y, meta),
+            lambda x=image_dir: load_acdc_semantic(x),
         )
         MetadataCatalog.get(key).set(
             image_root=image_dir,
