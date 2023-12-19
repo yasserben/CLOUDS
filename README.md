@@ -1,5 +1,6 @@
 # Collaborating Foundation models for Domain Generalized Semantic Segmentation
 
+This repository contains the code for the paper: [Collaborating Foundation models for Domain Generalized Semantic Segmentation](https://arxiv.org/abs/2312.09788).
 ## Overview
 
 **Domain Generalized Semantic Segmentation** (DGSS)
@@ -47,6 +48,20 @@ We provide the following checkpoints for CLOUDS:
 * [CLOUDS for GTA Domain Generalization](...)
 * [CLOUDS for SYNTHIA Domain Generalization](...)
 * [CLOUDS for Cityscapes Domain Generalization](...)
+
+## Citation 
+
+If you find our work useful in your research, please consider citing:
+```
+@misc{benigmim2023collaborating,
+      title={Collaborating Foundation models for Domain Generalized Semantic Segmentation}, 
+      author={Yasser Benigmim and Subhankar Roy and Slim Essid and Vicky Kalogeiton and Stéphane Lathuilière},
+      year={2023},
+      eprint={2312.09788},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
 
 
 ## Acknowledgement

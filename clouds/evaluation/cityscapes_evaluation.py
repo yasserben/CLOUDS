@@ -72,7 +72,6 @@ class CityscapesSemSegEvaluator(CityscapesEvaluator):
 
     def process(self, inputs, outputs):
         from cityscapesscripts.helpers.labels import trainId2label
-
         for input, output in zip(inputs, outputs):
             file_name = input["file_name"]
             basename = os.path.splitext(os.path.basename(file_name))[0]
@@ -84,8 +83,7 @@ class CityscapesSemSegEvaluator(CityscapesEvaluator):
                 if label.ignoreInEval:
                     continue
                 pred[output == train_id] = label.id
-            pred_color = colorize_mask(output, None)
-            pred_color.save(pred_filename)
+            Image.fromarray(pred).save(pred_filename)
 
     def evaluate(self):
         comm.synchronize()

@@ -1,6 +1,6 @@
 """
-Copyright 2023 Telecom Paris, Yasser BENIGMIM. All rights reserved.
-Licensed under the Apache License, Version 2.0
+This file may have been modified by Bytedance Ltd. and/or its affiliates (“Bytedance's Modifications”).
+All Bytedance's Modifications are Copyright (year) Bytedance Ltd. and/or its affiliates.
 
 Reference: https://github.com/facebookresearch/detectron2/blob/main/detectron2/data/datasets/cityscapes_panoptic.py
 """
@@ -95,7 +95,7 @@ def register_all_acdc_semantic(root):
 
         DatasetCatalog.register(
             key,
-            lambda x=image_dir, y=gt_dir: load_acdc_semantic(x, y, meta),
+            lambda x=image_dir: load_acdc_semantic(x),
         )
         MetadataCatalog.get(key).set(
             image_root=image_dir,
