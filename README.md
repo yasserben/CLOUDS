@@ -1,6 +1,8 @@
 # Collaborating Foundation models for Domain Generalized Semantic Segmentation
 
+
 This repository contains the code for the paper: [Collaborating Foundation models for Domain Generalized Semantic Segmentation](https://arxiv.org/abs/2312.09788).
+
 ## Overview
 
 **Domain Generalized Semantic Segmentation** (DGSS)
@@ -40,7 +42,6 @@ See [Preparing Datasets for CLOUDS](datasets/README.md).
 
 See [Getting Started with CLOUDS](GETTING_STARTED.md).
 
-
 ## Checkpoints
 
 We provide the following checkpoints for CLOUDS:
@@ -63,11 +64,33 @@ If you find our work useful in your research, please consider citing:
 }
 ```
 
+## Relevant Files :
 
-## Acknowledgement
+[train_net.py](train_net.py) : The training script of CLOUDS
 
-[Mask2Former](https://github.com/facebookresearch/Mask2Former)
+[clouds/clouds.py](clouds/clouds.py) : This file defines the model class and its forward function, which forms the
+core of our model's architecture and forward pass logic
+
+[generate_txt_im.py](generate_txt_im.py) : The script to generate a dataset using Stable Diffusion
+
+[prompt_llama70b.txt](prompt_llama70b.txt) : The text file containing 100 generated prompts using Llama70b-Chat
+
+
+## To-do list
+- [x] Release code
+  
+- [ ] Release checkpoints and training logs
+
+- [ ] Release generated dataset
+
+</details>
+
+## Acknowledgements
+CLOUDS draws its foundation from the following open-source projects, and we'd like to acknowledge their 
+authors for making their source code available :
 
 [FC-CLIP](https://github.com/bytedance/fc-clip)
+
+[Mask2Former](https://github.com/facebookresearch/Mask2Former)
 
 [HRDA](https://github.com/lhoyer/HRDA)

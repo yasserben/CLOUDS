@@ -85,6 +85,7 @@ class CityscapesSemSegEvaluator(CityscapesEvaluator):
                 pred[output == train_id] = label.id
             Image.fromarray(pred).save(pred_filename)
 
+
     def evaluate(self):
         comm.synchronize()
         if comm.get_rank() > 0:
