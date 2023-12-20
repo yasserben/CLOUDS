@@ -1,5 +1,6 @@
 # Collaborating Foundation models for Domain Generalized Semantic Segmentation
 
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/collaborating-foundation-models-for-domain/domain-generalization-on-gta-to-avg)](https://paperswithcode.com/sota/domain-generalization-on-gta-to-avg?p=collaborating-foundation-models-for-domain)
 
 This repository contains the code for the paper: [Collaborating Foundation models for Domain Generalized Semantic Segmentation](https://arxiv.org/abs/2312.09788).
 

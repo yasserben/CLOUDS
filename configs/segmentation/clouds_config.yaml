@@ -7,7 +7,7 @@ MODEL:
   # backbone part.
   BACKBONE:
     NAME: "CLIP"
-  WEIGHTS: "./clouds_cocopan.pth"
+  WEIGHTS: ""
   PIXEL_MEAN: [122.7709383, 116.7460125, 104.09373615]
   PIXEL_STD: [68.5005327, 66.6321579, 70.32316305]
   CLOUDS:
@@ -23,12 +23,6 @@ MODEL:
       INSTANCE_ON: False
       PANOPTIC_ON: False
       OBJECT_MASK_THRESHOLD: 0.0
-
-DATASETS:
-  TRAIN: ("gta5",)
-
-INPUT:
-  DATASET_MAPPER_NAME: "mask_former_semantic_gta5"
 
 DATALOADER:
   ASPECT_RATIO_GROUPING : False
