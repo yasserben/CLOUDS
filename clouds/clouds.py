@@ -10,10 +10,11 @@ Reference: https://github.com/facebookresearch/Mask2Former/blob/main/train_net.p
 """
 from typing import Tuple
 from copy import deepcopy
-
+import numpy as np
 import matplotlib.pyplot as plt
 import torch
 from torch import nn
+import os
 from torch.nn import functional as F
 
 from detectron2.config import configurable
@@ -626,24 +627,6 @@ class CLOUDS(nn.Module):
                             erosion_size=self.sam_erosion_size,
                             selection_mode=self.sam_selection_mode,
                         )
-                        # RGB IMAGE
-                        visualize_rgb(images_clean[0].unsqueeze(0), 0)
-                        save_rgb(images_clean[0].unsqueeze(0), 0)
-                        # SEMANTIC MAP BEFORE
-                        visualize_semantic_map_maxed(seg_maps_target[0]["sem_seg"])
-                        save_semantic_map_maxed(seg_maps_target[0]["sem_seg"])
-                        # BINARY MASK
-                        # a = separate_dict[0][11].squeeze()
-                        # plt.imshow(a, cmap="gray")
-                        # plt.show()
-                        # binary_a = a * 255
-                        # binary_a = binary_a.astype(np.uint8)
-                        # binary_image_pil = Image.fromarray(binary_a, "L")
-                        # rgb_image = binary_image_pil.convert("RGB")
-                        # rgb_image.save("./binary_mask_pole.png")
-                        # POINT PROMPTS
-                        # visualize_points_on_mask(coordinate_dict[0][13],(768,768))
-                        # save_points_on_mask(coordinate_dict[0][5],(768,768))
                         last_targets_target = []
                         for i, dico in enumerate(batched_inputs_target):
                             image_i = dico["image"]
