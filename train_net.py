@@ -350,20 +350,6 @@ class Trainer(DefaultTrainer):
         cfg.defrost()
         cfg.DATALOADER.NUM_WORKERS = 0  # save some memory and time for PreciseBN
 
-        if "cityscapes_train" in cfg.DATASETS.TRAIN:
-            list_of_metrics = [
-                "acdc_night_val/sem_seg/mIoU",
-                "acdc_fog_val/sem_seg/mIoU",
-                "acdc_snow_val/sem_seg/mIoU",
-                "acdc_rain_val/sem_seg/mIoU",
-            ]
-        else:
-            list_of_metrics = [
-                "cityscapes_val/sem_seg/mIoU",
-                "bdd_val/sem_seg/mIoU",
-                "mapillary_val/sem_seg/mIoU",
-            ]
-
         ret = [
             hooks.IterationTimer(),
             hooks.LRScheduler(),
