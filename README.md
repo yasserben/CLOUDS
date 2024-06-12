@@ -55,13 +55,13 @@ We provide the following checkpoints for CLOUDS:
 
 If you find our work useful in your research, please consider citing:
 ```
-@misc{benigmim2023collaborating,
-      title={Collaborating Foundation models for Domain Generalized Semantic Segmentation}, 
-      author={Yasser Benigmim and Subhankar Roy and Slim Essid and Vicky Kalogeiton and Stéphane Lathuilière},
-      year={2023},
-      eprint={2312.09788},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+@InProceedings{Benigmim_2024_CVPR,
+    author    = {Benigmim, Yasser and Roy, Subhankar and Essid, Slim and Kalogeiton, Vicky and Lathuili\`ere, St\'ephane},
+    title     = {Collaborating Foundation Models for Domain Generalized Semantic Segmentation},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2024},
+    pages     = {3108-3119}
 }
 ```
 
