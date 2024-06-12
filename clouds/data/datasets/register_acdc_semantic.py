@@ -7,6 +7,7 @@ Copyright 2023 Telecom Paris, Yasser BENIGMIM. All rights reserved.
 Licensed under the Apache License, Version 2.0
 >>>>>>> a0720d5c8af12026c7f706af51702f1dd6364a7f
 
+
 Reference: https://github.com/facebookresearch/detectron2/blob/main/detectron2/data/datasets/cityscapes_panoptic.py
 """
 
