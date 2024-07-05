@@ -41,15 +41,6 @@ See [Preparing Datasets for CLOUDS](datasets/README.md).
 See [Getting Started with CLOUDS](GETTING_STARTED.md).
 
 
-## Checkpoints
-
-We provide the following checkpoints for CLOUDS:
-
-* [CLOUDS for GTA Domain Generalization](...)
-* [CLOUDS for SYNTHIA Domain Generalization](...)
-* [CLOUDS for Cityscapes Domain Generalization](...)
-
-
 ## Relevant Files :
 
 [train_net.py](train_net.py) : The training script of CLOUDS
