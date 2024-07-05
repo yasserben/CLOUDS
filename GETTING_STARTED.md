@@ -17,7 +17,7 @@ Below is an example of how to train CLOUDS on GTA5 :
 #### Warmup on GTA5 (using ConvNext-L)
 ```
 python train_net.py --num-gpus 2 \
---config-file configs/warmup/dataset/train_gta.yaml OUTPUT_DIR /path/to/output_directory
+--config-file configs/warmup/gta/train_gta.yaml OUTPUT_DIR /path/to/output_directory
 ``` 
 #### Joint Training on GTA5 and generated dataset (using ConvNext-L)
 ```
