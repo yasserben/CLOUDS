@@ -73,18 +73,6 @@ If you find our work useful in your research, please consider citing:
 }
 ```
 
-## Relevant Files :
-
-[train_net.py](train_net.py) : The training script of CLOUDS
-
-[clouds/clouds.py](clouds/clouds.py) : This file defines the model class and its forward function, which forms the
-core of our model's architecture and forward pass logic
-
-[generate_txt_im.py](generate_txt_im.py) : The script to generate a dataset using Stable Diffusion
-
-[prompt_llama70b.txt](prompt_llama70b.txt) : The text file containing 100 generated prompts using Llama70b-Chat
-
-
 ## Acknowledgements
 CLOUDS draws its foundation from the following open-source projects, and we'd like to acknowledge their 
 authors for making their source code available :
